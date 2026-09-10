@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --font-mono: 'Roboto Mono', monospace;
 }
@@ -40,7 +42,7 @@ img {
   display: block;
 }
 
-h1 {
+/* h1 {
   margin: 40px 0;
   font-size: 64px;
   line-height: 70px;
@@ -161,4 +163,4 @@ svg {
       border-radius: 4px;
     }
   }
-}
+} */
