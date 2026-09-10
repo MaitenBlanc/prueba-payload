@@ -64,7 +64,11 @@ export default async function HomePage() {
       <Banner
         title={pageData.banner.title}
         imageUrl={imageUrl || ''}
-        altText={pageData.banner.title}
+        altText={
+          typeof pageData.banner.image === 'object' && pageData.banner.image?.alt
+            ? pageData.banner.image.alt
+            : 'Banner image'
+        }
       />
     </main>
   )

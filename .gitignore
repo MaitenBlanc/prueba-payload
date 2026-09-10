@@ -29,7 +29,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env*
+!.env.example
 
 # vercel
 .vercel
@@ -38,8 +39,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.env
+# database files
+*.db
+*.sqlite
+*.sqlite-journal
+*.sqlite3
 
+# media uploads
 /media
 
 # Playwright
