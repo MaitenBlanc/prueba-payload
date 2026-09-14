@@ -1,8 +1,13 @@
 import { draftMode } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(request: Request) {
   const draft = await draftMode()
   draft.disable()
-  redirect('/')
+
+  // Construimos la URL absoluta usando la petición actual
+  const url = new URL('/', request.url)
+
+  // Retornamos una respuesta HTTP formal que el servidor puede procesar sin errores
+  return NextResponse.redirect(url)
 }
