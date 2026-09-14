@@ -2,17 +2,17 @@ import React from 'react'
 import './styles.css'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Nos adaptamos a tu manera de cobrar.',
+  title: 'Payway | Soluciones de cobro',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
+    <html lang="es-AR">
       <body>
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   )

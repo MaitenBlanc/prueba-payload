@@ -1,67 +1,54 @@
-# Payload Blank Template
+# Prueba de concepto — Payload / Payway
 
-This template comes configured with the bare minimum to get started on anything you need.
+## Desarrollo local (PowerShell)
 
-## Quick start
+```powershell
+cd C:\Users\cbrai\Documents\laburo\payload\prueba-payload
+npm install
+npm run dev
+```
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+Web: http://localhost:3000 — Administración: http://localhost:3000/admin.
+Usar el `.env` existente. Para otra instalación, copiar `.env.example` a `.env` y completar PostgreSQL y S3/MinIO. No publicar credenciales en Git.
+La aplicación local comparte base y almacenamiento con la POC de Vercel. `push: false` impide sincronizaciones automáticas del esquema. El Docker Compose heredado de MongoDB no se usa.
 
-## Quick Start - local setup
+## Editar la landing
 
-To spin up this template locally, follow these steps:
+1. Entrar en `/admin` con tu usuario y abrir **Pages → inicio**.
+2. En la pestaña **Portada**, editar el título enriquecido y la imagen del **Banner**.
+3. Abrir la pestaña **Secciones** y elegir una sección con los botones superiores. Solo aparece el bloque seleccionado; cambiar de sección conserva las ediciones sin guardar. Cada bloque contiene campos normales para textos, imágenes y enlaces, con listas para tarjetas, beneficios, cifras, navegación y columnas del footer. **Ordenar / agregar secciones** muestra la vista general compacta para organizar los bloques.
+4. Subir o seleccionar imágenes desde Media. Si no hay archivo, se muestra el placeholder. El logo cargado reemplaza el logo de texto.
+5. Configurar destinos con `/ruta`, `#seccion`, `https://...`, `mailto:...` o `tel:...`. Sin destino se muestra texto deshabilitado.
+6. Guardar borrador para seguir trabajando y usar la previsualización con sesión iniciada. **Publicar** hace visibles los cambios en la landing. **Salir de previsualización** vuelve al contenido público.
 
-### Clone
+Los bloques centrales se pueden agregar, reordenar, eliminar u ocultar con **Mostrar sección**. Se permite un encabezado y un footer, que siempre se muestran en sus posiciones fijas. Los elementos de cada lista también se pueden agregar, reordenar o quitar.
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+La página pública muestra solo la versión publicada de `inicio`; no hay textos de secciones fijos que reemplacen cambios o listas vacías. Los textos iniciales de la referencia se cargaron con la migración. La definición del editor está en `src/landing/blocks.ts`, los valores para páginas nuevas en `src/landing/defaults.ts` y la presentación en `LandingSection.tsx`.
 
-### Development
+Los cambios de contenido no requieren deploy una vez desplegado este código. Vercel seguirá usando su frontend anterior hasta que se desplieguen estos cambios de código.
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+## Migraciones
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+Se usa `blocksAsJSON: true`: el editor ofrece bloques y listas nativos de Payload, almacenados en JSONB con sus versiones. Agregar estos bloques a la POC requirió solo `pages.layout` y `_pages_v.version_layout`.
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+- `20260914_121053_baseline`: esquema inicial para bases vacías.
+- `20260914_121251_editable_landing`: agrega las columnas y carga el contenido de `inicio`, conservando el banner, estado y versiones previas.
+- En el droplet existente se verificó y registró el baseline con `scripts/adopt-existing-schema.mjs` antes de migrar. Ese script es para adoptar la POC anterior, no para bases nuevas. Respaldó páginas, versiones y registro de migraciones en `.local/backups` (ignorado por Git).
 
-#### Docker (Optional)
+```powershell
+npm run payload -- migrate:status
+npm run payload -- migrate
+```
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+Aplicar las migraciones antes de arrancar el nuevo código contra otra base. Para una base vacía, `migrate` crea todo desde el baseline. No ejecutar `migrate:fresh` en la base compartida. Exportar el contenido editado antes de cualquier rollback deliberado de la migración de landing.
 
-To do so, follow these steps:
+## Verificación
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+```powershell
+npx tsc --noEmit
+npm run lint
+node --import tsx scripts/verify-landing.ts
+```
 
-## How it works
+La prueba de integración requiere el servidor local, acceso a PostgreSQL y Chrome. Crea una página y un usuario temporales, verifica persistencia de bloques e imágenes, aislamiento de borradores, publicación, validación de URLs y el formulario de administración, y los elimina al terminar. Las capturas se guardan en `.local`.
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
-
-### Collections
-
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
-
-- #### Users (Authentication)
-
-  Users are auth-enabled collections that have access to the admin panel.
-
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).

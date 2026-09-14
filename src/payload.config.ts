@@ -27,6 +27,10 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: postgresAdapter({
+    // Local development shares the database used by the deployed proof of concept.
+    // Schema changes must be applied deliberately through migrations.
+    push: false,
+    blocksAsJSON: true,
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },

@@ -1,75 +1,37 @@
-import { headers as getHeaders } from 'next/headers.js'
-import { draftMode } from 'next/headers' // <-- 1. Importar draftMode
+import { draftMode, headers } from 'next/headers'
 import { getPayload } from 'payload'
-import React from 'react'
-
 import config from '@/payload.config'
+import Link from 'next/link'
 import Banner from './components/Banner'
+import { LandingSection } from './components/LandingSection'
+
+export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  // 2. Verificamos si estamos en modo preview
-  const draft = await draftMode()
-  const isDraftMode = draft.isEnabled
-
+  const payload = await getPayload({ config })
+  const { isEnabled } = await draftMode()
+  const { user } = isEnabled ? await payload.auth({ headers: await headers() }) : { user: null }
+  const isDraftMode = isEnabled && Boolean(user)
   const { docs } = await payload.find({
-    collection: 'pages',
-    // 3. ¡La magia ocurre aquí! Pedimos el borrador si estamos en preview
-    draft: isDraftMode,
-    where: {
-      slug: { equals: 'inicio' },
-    },
+    collection: 'pages', draft: isDraftMode, depth: 3, limit: 1,
+    overrideAccess: false, user,
+    where: { and: [{ slug: { equals: 'inicio' } }, ...(isDraftMode ? [] : [{ _status: { equals: 'published' as const } }])] },
   })
+  const page = docs[0]
+  const layout = page?.layout || []
+  const header = layout.find(block => block.blockType === 'header')
+  const footer = layout.find(block => block.blockType === 'footer')
 
-  const pageData = docs[0]
-
-  // 4. Manejo por si aún no has creado la página en el panel de administración
-  if (!pageData || !pageData.banner) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Página no encontrada</h1>
-        <p className="text-gray-600 mb-6">
-          Aún no has creado la página con el slug "inicio" en Payload.
-        </p>
-        <a
-          href={payloadConfig.routes.admin}
-          className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
-        >
-          Ir al panel de administración
-        </a>
-      </div>
-    )
-  }
-
-  // 5. Extraemos la URL de la imagen del grupo 'banner'
-  const imageUrl =
-    typeof pageData.banner.image === 'object' && pageData.banner.image !== null
-      ? pageData.banner.image.url
-      : ''
-
-  // 6. Renderizamos la página usando Tailwind y nuestro componente
-  return (
-    <main className="min-h-screen bg-white">
-      {/* Indicador visual opcional para saber que estás viendo un borrador */}
-      {isDraftMode && (
-        <div className="bg-yellow-400 text-black text-center text-sm py-1 font-bold z-50 relative">
-          Modo Previsualización Activo
-        </div>
-      )}
-
-      <Banner
-        title={pageData.banner.title}
-        imageUrl={imageUrl || ''}
-        altText={
-          typeof pageData.banner.image === 'object' && pageData.banner.image?.alt
-            ? pageData.banner.image.alt
-            : 'Banner image'
-        }
-      />
+  return <>
+    <a className="skip-link" href="#contenido">Saltar al contenido</a>
+    {header && <LandingSection block={header} />}
+    <main id="contenido">
+      {isDraftMode && <div className="preview-notice">Modo Previsualización Activo · <Link href="/api/preview/exit" prefetch={false}>Salir de previsualización</Link></div>}
+      {page ? <>
+        <Banner title={page.banner?.title} image={page.banner?.image} />
+        {layout.filter(block => block.blockType !== 'header' && block.blockType !== 'footer').map((block, index) => <LandingSection block={block} key={block.id || index} />)}
+      </> : <p className="empty-page">Publicá la página «inicio» desde el administrador para mostrar la landing.</p>}
     </main>
-  )
+    {footer && <LandingSection block={footer} />}
+  </>
 }

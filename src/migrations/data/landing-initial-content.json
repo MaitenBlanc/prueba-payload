@@ -1,0 +1,398 @@
+[
+  {
+    "blockType": "header",
+    "visible": true,
+    "brand": "payway",
+    "links": [
+      {
+        "label": "Soluciones de cobro",
+        "url": "#soluciones-de-cobro"
+      },
+      {
+        "label": "Servicios adicionales"
+      },
+      {
+        "label": "Ayuda"
+      },
+      {
+        "label": "Noticias"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Ingresá"
+      },
+      {
+        "label": "Registrate"
+      }
+    ]
+  },
+  {
+    "blockType": "payments",
+    "visible": true,
+    "title": "Nos adaptamos a tu manera de cobrar",
+    "items": [
+      {
+        "title": "Terminal"
+      },
+      {
+        "title": "QR que acepta…"
+      }
+    ]
+  },
+  {
+    "blockType": "business",
+    "visible": true,
+    "title": "¡Tenés todo\nsolucionado!",
+    "items": [
+      {
+        "text": {
+          "root": {
+            "type": "root",
+            "version": 1,
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "children": [
+              {
+                "type": "paragraph",
+                "version": 1,
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "children": [
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "No importa el tamaño de tu comercio.",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "text": {
+          "root": {
+            "type": "root",
+            "version": 1,
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "children": [
+              {
+                "type": "paragraph",
+                "version": 1,
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "children": [
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "Cobrá ",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "rápido",
+                    "format": 1,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": ", recibí ",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "antes el dinero",
+                    "format": 1,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": " de tus ventas y ",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "controlá tu negocio",
+                    "format": 1,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": " desde un solo lugar.",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "text": {
+          "root": {
+            "type": "root",
+            "version": 1,
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "children": [
+              {
+                "type": "paragraph",
+                "version": 1,
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "children": [
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "Sumate a ",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "Payway",
+                    "format": 1,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": " y potenciá tus ",
+                    "format": 0,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  },
+                  {
+                    "type": "text",
+                    "version": 1,
+                    "text": "ventas.",
+                    "format": 1,
+                    "detail": 0,
+                    "mode": "normal",
+                    "style": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "button": {
+      "label": "Registrate en Payway"
+    }
+  },
+  {
+    "blockType": "kit",
+    "visible": true,
+    "title": "Conocé el kit de soluciones Payway",
+    "items": [
+      {
+        "title": "Terminales inteligentes",
+        "description": "Cobrás rápido y sencillo."
+      },
+      {
+        "title": "Cobros con QR",
+        "description": "Aceptás todos los medios de pago."
+      },
+      {
+        "title": "Cobro Anticipado",
+        "description": "Recibís el dinero de tus ventas en 24 horas hábiles."
+      },
+      {
+        "title": "Gestión del negocio",
+        "description": "Administrás tu comercio desde cualquier lugar."
+      }
+    ]
+  },
+  {
+    "blockType": "benefits",
+    "visible": true,
+    "title": "Brindá estos beneficios a tus clientes y ¡hacela simple!",
+    "items": [
+      {
+        "title": "Vendé en Cuotas y con programa Cuotas MiPyME",
+        "description": "Conocé más sobre nuestros programas de Cuotas"
+      },
+      {
+        "title": "Ofrecé retiro de efectivo en tu local",
+        "description": "Conocé más sobre retiro de efectivo"
+      },
+      {
+        "title": "Cobrá con Dólar turista a clientes del exterior",
+        "description": "Conocé más sobre Dólar turista"
+      }
+    ],
+    "button": {
+      "label": "Registrate en Payway"
+    }
+  },
+  {
+    "blockType": "stats",
+    "visible": true,
+    "title": "Payway en cifras",
+    "items": [
+      {
+        "value": "+ de 100",
+        "label": "Medios de pago"
+      },
+      {
+        "value": "+ 350 mil",
+        "label": "Comercios del país"
+      },
+      {
+        "value": "+ 3700",
+        "label": "Operaciones por minuto"
+      },
+      {
+        "value": "+ de 160",
+        "label": "Partners nos acompañan"
+      }
+    ]
+  },
+  {
+    "blockType": "footer",
+    "visible": true,
+    "brand": "payway",
+    "socials": [
+      {
+        "label": "LinkedIn"
+      },
+      {
+        "label": "Instagram"
+      },
+      {
+        "label": "YouTube"
+      }
+    ],
+    "appsTitle": "Descargá la app",
+    "apps": [
+      {
+        "label": "Google Play"
+      },
+      {
+        "label": "App Store"
+      }
+    ],
+    "columns": [
+      {
+        "title": "Soluciones de cobro",
+        "items": [
+          {
+            "label": "Con terminal de cobro"
+          },
+          {
+            "label": "Con código QR"
+          },
+          {
+            "label": "Online"
+          },
+          {
+            "label": "Con link de pago"
+          },
+          {
+            "label": "Por teléfono"
+          },
+          {
+            "label": "Con débito automático"
+          },
+          {
+            "label": "Desarrolladores"
+          }
+        ]
+      },
+      {
+        "title": "Acerca de",
+        "items": [
+          {
+            "label": "Seguridad en las ventas"
+          },
+          {
+            "label": "Comisiones"
+          },
+          {
+            "label": "Noticias"
+          },
+          {
+            "label": "Trabajá en Payway"
+          },
+          {
+            "label": "Convertite en proveedor"
+          },
+          {
+            "label": "Legales"
+          },
+          {
+            "label": "Soluciones para ONG"
+          },
+          {
+            "label": "Partners"
+          }
+        ]
+      },
+      {
+        "title": "Ayuda",
+        "items": [
+          {
+            "label": "Centro de ayuda"
+          },
+          {
+            "label": "Convertite en cliente 0810-666-4888"
+          },
+          {
+            "label": "Atención a comercios 0810-666-4888"
+          },
+          {
+            "label": "Soporte 0810-666-4888"
+          },
+          {
+            "label": "WhatsApp +54 9 11 5910 3194"
+          }
+        ]
+      }
+    ],
+    "legal": "Payway S.A.U. Lavardén 247 (C1437FBE), CABA, Argentina\nCUIT:30-71766440-6. Derechos reservados."
+  }
+]

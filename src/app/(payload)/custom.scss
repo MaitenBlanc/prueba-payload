@@ -1,0 +1,22 @@
+.section-editor-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.section-editor-nav button {
+  padding: 10px 14px;
+  border: 1px solid var(--theme-elevation-200);
+  border-radius: 6px;
+  background: var(--theme-elevation-50);
+  color: var(--theme-text);
+  cursor: pointer;
+  font: inherit;
+}
+.section-editor-nav button[aria-pressed='true'] {
+  background: var(--theme-text);
+  color: var(--theme-bg);
+}
+.section-editor-nav button:focus-visible { outline: 2px solid var(--theme-text); outline-offset: 3px; }
+.section-editor-help { color: var(--theme-elevation-700); margin-bottom: 24px; }
+.section-editor-errors { font-weight: 700; }

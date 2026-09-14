@@ -54,3 +54,6 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Local content backups
+/.local/

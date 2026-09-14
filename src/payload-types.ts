@@ -186,8 +186,206 @@ export interface Page {
       };
       [k: string]: unknown;
     };
-    image: number | Media;
+    image?: (number | null) | Media;
   };
+  /**
+   * Encabezado y pie mantienen sus posiciones fijas. Usá Mostrar sección para ocultar un bloque.
+   */
+  layout?:
+    | (
+        | {
+            visible?: boolean | null;
+            logo?: (number | null) | Media;
+            brand?: string | null;
+            links?:
+              | {
+                  label?: string | null;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            actions?:
+              | {
+                  label?: string | null;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'header';
+          }
+        | {
+            visible?: boolean | null;
+            title?: string | null;
+            items?:
+              | {
+                  title?: string | null;
+                  description?: string | null;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'payments';
+          }
+        | {
+            visible?: boolean | null;
+            title?: string | null;
+            image?: (number | null) | Media;
+            items?:
+              | {
+                  text?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: any;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[]
+              | null;
+            button?: {
+              label?: string | null;
+              /**
+               * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+               */
+              url?: string | null;
+              id?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'business';
+          }
+        | {
+            visible?: boolean | null;
+            title?: string | null;
+            items?:
+              | {
+                  title?: string | null;
+                  description?: string | null;
+                  image?: (number | null) | Media;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'kit';
+          }
+        | {
+            visible?: boolean | null;
+            title?: string | null;
+            items?:
+              | {
+                  title?: string | null;
+                  description?: string | null;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            button?: {
+              label?: string | null;
+              /**
+               * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+               */
+              url?: string | null;
+              id?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'benefits';
+          }
+        | {
+            visible?: boolean | null;
+            title?: string | null;
+            items?:
+              | {
+                  value?: string | null;
+                  label?: string | null;
+                  image?: (number | null) | Media;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            visible?: boolean | null;
+            logo?: (number | null) | Media;
+            brand?: string | null;
+            socials?:
+              | {
+                  label?: string | null;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            appsTitle?: string | null;
+            apps?:
+              | {
+                  label?: string | null;
+                  /**
+                   * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                   */
+                  url?: string | null;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            columns?:
+              | {
+                  title?: string | null;
+                  items?:
+                    | {
+                        label?: string | null;
+                        /**
+                         * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+                         */
+                        url?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                }[]
+              | null;
+            legal?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'footer';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -321,6 +519,168 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         title?: T;
         image?: T;
+      };
+  layout?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              visible?: T;
+              logo?: T;
+              brand?: T;
+              links?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              actions?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        payments?:
+          | T
+          | {
+              visible?: T;
+              title?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        business?:
+          | T
+          | {
+              visible?: T;
+              title?: T;
+              image?: T;
+              items?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        kit?:
+          | T
+          | {
+              visible?: T;
+              title?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        benefits?:
+          | T
+          | {
+              visible?: T;
+              title?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              visible?: T;
+              title?: T;
+              items?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    image?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        footer?:
+          | T
+          | {
+              visible?: T;
+              logo?: T;
+              brand?: T;
+              socials?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              appsTitle?: T;
+              apps?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              columns?:
+                | T
+                | {
+                    title?: T;
+                    items?:
+                      | T
+                      | {
+                          label?: T;
+                          url?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              legal?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
