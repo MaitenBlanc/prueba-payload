@@ -267,9 +267,6 @@ export interface Page {
               | null;
             button?: {
               label?: string | null;
-              /**
-               * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
-               */
               url?: string | null;
               id?: string | null;
             };
