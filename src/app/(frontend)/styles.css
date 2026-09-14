@@ -28,6 +28,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline
 .hero-title strong { color: var(--green); font-weight: inherit; }
 .hero-image-placeholder { display: grid; place-items: center; min-height: 320px; background: #edf0f5; color: #657085; }
 .hero-image-placeholder span { padding: 18px 28px; border: 1px dashed #99a3b5; border-radius: 4px; font-size: 16px; }
+.solutions-legal {max-width: 1200px; margin: 20px auto 0; text-align: center; font-size: 13px; color: #070042; line-height: 1.4;}
 .solutions-heading { min-height: 150px; display: grid; place-items: center; padding: 36px 24px; text-align: center; }
 .solutions-heading h2 { margin: 0; font-size: clamp(28px, 2.2vw, 42px); line-height: 1.2; letter-spacing: -1.2px; font-weight: 800; }
 .solutions-band { background: var(--navy); color: white; padding: 40px 24px; }

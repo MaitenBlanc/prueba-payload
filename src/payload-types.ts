@@ -170,26 +170,8 @@ export interface Media {
 export interface Page {
   id: number;
   slug: string;
-  banner: {
-    title: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    image?: (number | null) | Media;
-  };
   /**
-   * Encabezado y pie mantienen sus posiciones fijas. Usá Mostrar sección para ocultar un bloque.
+   * Encabezado y pie mantienen sus posiciones fijas. Usa Mostrar sección para ocultar un bloque.
    */
   layout?:
     | (
@@ -223,6 +205,28 @@ export interface Page {
           }
         | {
             visible?: boolean | null;
+            title: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            image?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'banner';
+          }
+        | {
+            visible?: boolean | null;
             title?: string | null;
             items?:
               | {
@@ -232,6 +236,7 @@ export interface Page {
                   id?: string | null;
                 }[]
               | null;
+            legal?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'payments';
@@ -514,12 +519,6 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   slug?: T;
-  banner?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-      };
   layout?:
     | T
     | {
@@ -546,6 +545,15 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        banner?:
+          | T
+          | {
+              visible?: T;
+              title?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
         payments?:
           | T
           | {
@@ -559,6 +567,7 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     id?: T;
                   };
+              legal?: T;
               id?: T;
               blockName?: T;
             };

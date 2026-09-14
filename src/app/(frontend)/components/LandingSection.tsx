@@ -41,13 +41,44 @@ export function LandingSection({ block }: { block: LandingBlock }) {
         <details className="mobile-menu"><summary>Menú</summary><nav aria-label="Navegación móvil">{nav}</nav></details>
       </div></header>
     }
+    case 'banner': {
+      const imageUrl = typeof block.image === 'object' && block.image !== null ? block.image.url : null
+      const imageAlt = typeof block.image === 'object' && block.image !== null && block.image.alt ? block.image.alt : 'Banner principal'
+
+      return (
+        <section className="relative w-full min-h-[400px] md:h-[500px] flex items-center overflow-hidden" aria-label="Banner principal">
+          {imageUrl && (
+            <Image
+              src={imageUrl}
+              alt={imageAlt}
+              fill
+              className="object-cover object-center z-0"
+              priority
+            />
+          )}
+          <div className="relative z-10 w-full md:w-[55%] lg:w-[60%] pl-10 pr-4 md:pl-20 md:pr-8 lg:pl-32 lg:pr-8 flex flex-col justify-center">
+            <div
+              className="text-3xl lg:text-[44px] font-bold text-white leading-tight
+                            [&_p]:m-0
+                            [&_strong]:text-[#00ee43] [&_strong]:font-bold"
+            >
+              {block.title && <RichText data={block.title} />}
+            </div>
+          </div>
+        </section>
+      )
+    }
     case 'payments':
       return <section id="soluciones-de-cobro" className="payment-solutions" aria-label={block.title || undefined}>
         <div className="solutions-heading"><h2>{block.title}</h2></div>
         <div className="solutions-band"><div className="solutions-inner">{(block.items || []).map((item, i) => <article className="solution-placeholder" key={item.id || i}>
           <MediaSlot media={item.image} className="icon-placeholder" label="Ícono" width={90} height={90}/>
           <div><h3>{item.title}</h3>{item.description ? <p>{item.description}</p> : <div className="copy-placeholder" aria-label="Contenido pendiente" />}</div>
-        </article>)}</div></div>
+        </article>)}</div>
+        </div>
+        {block.legal && (
+              <p className="solutions-legal">{block.legal}</p>
+            )}
       </section>
     case 'business':
       return <section className="business-benefits" aria-label={block.title || undefined}>
