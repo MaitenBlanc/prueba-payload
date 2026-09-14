@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(dirname),
   },
+  allowedDevOrigins: ['192.168.0.251'],
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

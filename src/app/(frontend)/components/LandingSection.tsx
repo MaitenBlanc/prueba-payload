@@ -7,11 +7,17 @@ import type { Media, Page } from '@/payload-types'
 export type LandingBlock = NonNullable<Page['layout']>[number]
 type MediaValue = number | Media | null | undefined
 
-export function MediaSlot({ media, className, label }: { media?: MediaValue; className: string; label: string }) {
+export function MediaSlot({ media, className, label, width, height }: { media?: MediaValue; className: string; label: string, width?: number, height?: number }) {
   const file = typeof media === 'object' && media ? media : null
   return (
     <div className={`${className}${file?.url ? ' has-media' : ''}`}>
-      {file?.url ? <Image src={file.url} alt={file.alt || ''} width={file.width || 800} height={file.height || 500} unoptimized /> : <span>{label}</span>}
+      {file?.url ? <Image src={file.url} alt={file.alt || ''} width={width || file.width || 800} height={height || file.height || 500} style={{ 
+            width: '100%', 
+            height: '100%', 
+            maxWidth: width || '100%', 
+            maxHeight: height || '100%', 
+            objectFit: 'contain' 
+          }} unoptimized /> : <span>{label}</span>}
     </div>
   )
 }
@@ -39,7 +45,7 @@ export function LandingSection({ block }: { block: LandingBlock }) {
       return <section id="soluciones-de-cobro" className="payment-solutions" aria-label={block.title || undefined}>
         <div className="solutions-heading"><h2>{block.title}</h2></div>
         <div className="solutions-band"><div className="solutions-inner">{(block.items || []).map((item, i) => <article className="solution-placeholder" key={item.id || i}>
-          <MediaSlot media={item.image} className="icon-placeholder" label="Ícono" />
+          <MediaSlot media={item.image} className="icon-placeholder" label="Ícono" width={90} height={90}/>
           <div><h3>{item.title}</h3>{item.description ? <p>{item.description}</p> : <div className="copy-placeholder" aria-label="Contenido pendiente" />}</div>
         </article>)}</div></div>
       </section>
@@ -53,7 +59,7 @@ export function LandingSection({ block }: { block: LandingBlock }) {
     case 'kit':
       return <section className="solutions-kit" aria-label={block.title || undefined}><h2>{block.title}</h2><div className="solutions-kit-grid">
         {(block.items || []).map((item, i) => <article className="solutions-kit-card" key={item.id || i}>
-          <CmsLink url={item.url} className="kit-card-link"><MediaSlot media={item.image} className="kit-icon-placeholder" label="Ícono" /><h3>{item.title}</h3><p>{item.description}</p></CmsLink>
+          <CmsLink url={item.url} className="kit-card-link"><MediaSlot media={item.image} className="kit-icon-placeholder" label="Ícono" width={80} height={80} /><h3>{item.title}</h3><p>{item.description}</p></CmsLink>
         </article>)}
       </div></section>
     case 'benefits':
@@ -63,7 +69,7 @@ export function LandingSection({ block }: { block: LandingBlock }) {
       </div></section>
     case 'stats':
       return <section className="payway-stats" aria-label={block.title || undefined}><h2>{block.title}</h2><dl className="payway-stats-grid">
-        {(block.items || []).map((item, i) => <div className="payway-stat" key={item.id || i}><MediaSlot media={item.image} className="stat-icon-placeholder" label="Ícono" /><div className="stat-copy"><dt><CmsLink url={item.url}>{item.label}</CmsLink></dt><dd>{item.value}</dd></div></div>)}
+        {(block.items || []).map((item, i) => <div className="payway-stat" key={item.id || i}><MediaSlot media={item.image} className="stat-icon-placeholder" label="Ícono" width={110} height={110} /><div className="stat-copy"><dt><CmsLink url={item.url}>{item.label}</CmsLink></dt><dd>{item.value}</dd></div></div>)}
       </dl></section>
     case 'footer':
       return <footer className="site-footer"><div className="footer-inner"><div className="footer-grid"><div className="footer-brand">
