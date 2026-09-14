@@ -125,6 +125,10 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  /**
+   * Diseñadora: carga imágenes y edita páginas. Administrador: también administra usuarios y elimina contenido.
+   */
+  role: 'admin' | 'designer';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -267,6 +271,9 @@ export interface Page {
               | null;
             button?: {
               label?: string | null;
+              /**
+               * Usá /ruta, #seccion, https://..., mailto:... o tel:... . Vacío deja el enlace deshabilitado.
+               */
               url?: string | null;
               id?: string | null;
             };
@@ -475,6 +482,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

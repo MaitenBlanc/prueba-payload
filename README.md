@@ -52,3 +52,19 @@ node --import tsx scripts/verify-landing.ts
 
 La prueba de integración requiere el servidor local, acceso a PostgreSQL y Chrome. Crea una página y un usuario temporales, verifica persistencia de bloques e imágenes, aislamiento de borradores, publicación, validación de URLs y el formulario de administración, y los elimina al terminar. Las capturas se guardan en `.local`.
 
+
+## Usuarios y rol de diseñadora
+
+En Users, los administradores pueden asignar **Administrador** o **Diseñadora / Contenido**.
+
+- Diseñadora: ingresa al panel, carga y edita imágenes, modifica páginas existentes, guarda borradores y publica. Su panel muestra Media y Pages.
+- Administrador: también administra usuarios, crea páginas y elimina páginas o imágenes.
+- El rol de diseñadora no permite listar, crear, modificar, desbloquear ni eliminar usuarios por API. La lectura de su propio registro se conserva para que funcione la sesión (`/me`). No puede cambiar su rol.
+- La migración `20260914_163712_designer_role` conserva a los usuarios existentes como administradores. Los nuevos usuarios reciben el rol de diseñadora por defecto, salvo el primer usuario de una instalación vacía, que es administrador.
+
+Los permisos están en el código: deben desplegarse en Vercel antes de utilizar allí la cuenta limitada. La migración por sí sola no protege un deploy que siga ejecutando el código anterior.
+
+Para crear otra cuenta de contenido, usar Users desde una cuenta administradora. El script `node --import tsx scripts/create-designer.ts email` también permite provisionar una cuenta con contraseña aleatoria; guarda las credenciales iniciales en `.local/designer-access-<id>.txt`, fuera de Git. No envía correos.
+
+La prueba `node --import tsx scripts/verify-designer.ts` verifica permisos de API y panel con datos temporales, que elimina al terminar.
+

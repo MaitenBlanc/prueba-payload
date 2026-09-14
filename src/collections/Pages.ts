@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { landingBlocks } from '../landing/blocks'
 import { defaultLayout } from '../landing/defaults'
+import { canEditContent, isAdmin } from '../access/roles'
 
 export const Pages: CollectionConfig = {
     slug: 'pages',
@@ -14,7 +15,11 @@ export const Pages: CollectionConfig = {
         },
     },
     access: {
-        read: ({ req }) => req.user ? true : { _status: { equals: 'published' } },
+        read: ({ req }) => ['admin', 'designer'].includes(req.user?.role || '') ? true : { _status: { equals: 'published' } },
+        create: isAdmin,
+        update: canEditContent,
+        delete: isAdmin,
+        readVersions: canEditContent,
     },
     versions: {
         drafts: true,

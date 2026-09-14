@@ -67,7 +67,7 @@ try {
 
   const password = randomUUID() + randomUUID()
   const email = `cms-verification-${randomUUID()}@example.invalid`
-  const user = await payload.create({ collection: 'users', data: { email, password } })
+  const user = await payload.create({ collection: 'users', data: { email, password, role: 'admin' } })
   userId = user.id
   browser = await chromium.launch({ channel: 'chrome', headless: true })
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
