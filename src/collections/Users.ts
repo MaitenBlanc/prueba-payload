@@ -3,8 +3,12 @@ import { canEditContent, isAdmin } from '../access/roles'
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: { singular: 'Usuario', plural: 'Usuarios' },
   admin: {
     useAsTitle: 'email',
+    group: 'Administración',
+    defaultColumns: ['email', 'role'],
+    hideAPIURL: true,
     hidden: ({ user }) => user?.role !== 'admin',
   },
   auth: true,

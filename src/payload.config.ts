@@ -17,6 +17,12 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    avatar: 'default',
+    meta: { titleSuffix: ' · Estudio de contenido' },
+    components: {
+      graphics: { Logo: '@/components/admin/StudioLogo#StudioLogo' },
+      beforeDashboard: ['@/components/admin/StudioWelcome#StudioWelcome'],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },

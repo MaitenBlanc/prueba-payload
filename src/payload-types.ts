@@ -149,11 +149,16 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Subí tus imágenes, logos e íconos. Después podés elegirlos al editar una página.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
+  /**
+   * Contá brevemente qué se ve. Esta descripción ayuda a las personas que usan lectores de pantalla.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -168,14 +173,19 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Elegí una página para editar sus secciones. Guardá un borrador para revisar los cambios antes de publicar.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
   id: number;
+  /**
+   * La página principal se identifica como «inicio». Conservá ese nombre.
+   */
   slug: string;
   /**
-   * Encabezado y pie mantienen sus posiciones fijas. Usa Mostrar sección para ocultar un bloque.
+   * El encabezado y el pie mantienen sus posiciones. Desmarcá Mostrar sección si querés ocultarla.
    */
   layout?:
     | (

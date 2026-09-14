@@ -77,7 +77,7 @@ try {
   const response = await page.goto(`http://localhost:3000/admin/collections/pages/${pageId}`, { waitUntil: 'networkidle', timeout: 120000 })
   assert.equal(response?.status(), 200)
   await page.getByText('Secciones', { exact: true }).click()
-  await page.getByText('Secciones de la landing', { exact: true }).waitFor({ timeout: 30000 })
+  await page.getByText('Secciones de la página', { exact: true }).waitFor({ timeout: 30000 })
   await page.getByRole('button', { name: 'Marca y menú', exact: true }).click()
   const visibleRows = page.locator('.landing-section-editor > .blocks-field > .blocks-field__rows > div[id]:visible')
   assert.equal(await visibleRows.count(), 1)

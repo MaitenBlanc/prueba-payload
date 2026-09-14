@@ -68,3 +68,7 @@ Para crear otra cuenta de contenido, usar Users desde una cuenta administradora.
 
 La prueba `node --import tsx scripts/verify-designer.ts` verifica permisos de API y panel con datos temporales, que elimina al terminar.
 
+
+## Presentación del panel
+
+El administrador reutiliza la paleta violeta y el concepto de Estudio de contenido del MVP. Los accesos están agrupados en **Contenido** (Páginas y Biblioteca de imágenes) y **Administración** (Usuarios, solo para administradores). La bienvenida explica guardar borrador, revisar y publicar, con accesos a las pantallas existentes. El tema está aislado en `src/app/(payload)/custom.scss`, con adaptación a modo oscuro y móvil. No modifica los permisos, los datos ni la landing pública.

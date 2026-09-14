@@ -5,7 +5,7 @@ import type { BlocksFieldClientComponent } from 'payload'
 import { useEffect, useId, useState } from 'react'
 
 const labels: Record<string, string> = {
-  header: 'Marca y menú', payments: 'Formas de cobro', business: 'Todo solucionado',
+  header: 'Marca y menú', banner: 'Portada', payments: 'Formas de cobro', business: 'Todo solucionado',
   kit: 'Kit de soluciones', benefits: 'Beneficios', stats: 'Cifras', footer: 'Pie de página',
 }
 

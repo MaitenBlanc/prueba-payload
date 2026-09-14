@@ -5,8 +5,13 @@ import { canEditContent, isAdmin } from '../access/roles'
 
 export const Pages: CollectionConfig = {
     slug: 'pages',
+    labels: { singular: 'Página', plural: 'Páginas' },
     admin: {
         useAsTitle: 'slug',
+        group: 'Contenido',
+        description: 'Elegí una página para editar sus secciones. Guardá un borrador para revisar los cambios antes de publicar.',
+        defaultColumns: ['slug', '_status', 'updatedAt'],
+        hideAPIURL: true,
         preview: (doc) => {
             if (doc?.slug) {
                 return `/api/preview?slug=${encodeURIComponent(String(doc.slug))}`
@@ -28,6 +33,8 @@ export const Pages: CollectionConfig = {
     fields: [
         {
             name: 'slug',
+            label: 'Nombre de la página',
+            admin: { description: 'La página principal se identifica como «inicio». Conservá ese nombre.' },
             type: 'text',
             required: true,
             unique: true,
@@ -40,13 +47,13 @@ export const Pages: CollectionConfig = {
                     fields: [
                         {
                             name: 'layout',
-                            label: 'Secciones de la landing',
+                            label: 'Secciones de la página',
                             type: 'blocks',
                             blocks: landingBlocks,
                             defaultValue: () => structuredClone(defaultLayout),
                             admin: {
                                 components: { Field: '@/components/admin/SectionEditor#SectionEditor' },
-                                description: 'Encabezado y pie mantienen sus posiciones fijas. Usa Mostrar sección para ocultar un bloque.',
+                                description: 'El encabezado y el pie mantienen sus posiciones. Desmarcá Mostrar sección si querés ocultarla.',
                             },
                             validate: (value: unknown) => {
                                 if (!Array.isArray(value)) return true
